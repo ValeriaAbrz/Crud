@@ -1,0 +1,44 @@
+﻿@model ML.Departamento
+@{
+    ViewBag.Title = "GetAll";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="=row">
+            <div class="col-md-12">
+                <h2>Departamento</h2>
+            </div>
+        </div>
+        <div class="form-group" align="right">
+            @using (Html.BeginForm("Importar", "Departamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input style="text-align:center" type="file" name="ImportarArchivo" />
+                <br />
+                <input type="submit" value="Importar" />
+
+            }
+        </div>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <td>Eliminar</td>
+                    <td>IdDepartamento</td>
+                    <td>Descripcion</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Departamento departamento in Model.Departamentos)
+                {
+                    <tr>
+                        <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Departamento", new { DepartamentoID = departamento.DepartamentoID })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                        <td>@departamento.DepartamentoID</td>
+                        <td>@departamento.Descripcion</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
